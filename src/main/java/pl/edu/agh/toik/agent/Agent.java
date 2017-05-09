@@ -1,6 +1,7 @@
 package pl.edu.agh.toik.agent;
 
+import pl.edu.agh.toik.worker.WorkerContext;
+
 public interface Agent {
-    void step();
-    void migrate();
+    void step(WorkerContext context);
 }
