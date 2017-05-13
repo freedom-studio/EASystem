@@ -10,7 +10,7 @@ public class Worker {
         WorkerConfig workerConfig = parse(xmlConfig);
         spawnAgents(workerConfig);
     }
-
+    
     public void step() {
 
     }

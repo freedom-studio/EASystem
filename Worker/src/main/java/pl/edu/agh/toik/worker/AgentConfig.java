@@ -1,9 +1,9 @@
 package pl.edu.agh.toik.worker;
 
-import javafx.stage.Stage;
-import pl.edu.agh.toik.communication.Id;
-
 import java.util.List;
+
+import pl.edu.agh.toik.agent.Stage;
+import pl.edu.agh.toik.communication.Id;
 
 public interface AgentConfig {
     Id getAgentId();

@@ -8,4 +8,5 @@ public interface WorkerConfig {
     StopStrategy getStopStrategy();
     List<AgentObserver> getObservers();
     List<AgentConfig> getAgentConfigs();
+    int getAgentCount();
 }
