@@ -1,4 +1,4 @@
-package pl.edu.agh.eas.starter.mocks.algorithm;
+package pl.edu.agh.toik.starter.mocks.agent.algorithm;
 
 public class NoneCrossover implements CrossoverAlgorithm {
 

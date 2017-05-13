@@ -1,4 +1,4 @@
-package pl.edu.agh.eas.starter;
+package pl.edu.agh.toik.starter;
 
 public interface Configuration {
 	public String getAsXML();
