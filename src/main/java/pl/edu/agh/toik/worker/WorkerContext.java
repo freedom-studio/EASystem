@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface WorkerContext {
     void sendMessage(Message message);
-    List<Message> takeReceivedMessages();
+    List<Message> getReceivedMessages();
 }

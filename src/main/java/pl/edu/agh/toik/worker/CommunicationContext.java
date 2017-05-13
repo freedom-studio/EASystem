@@ -20,8 +20,12 @@ public class CommunicationContext implements WorkerContext {
     }
 
     @Override
-    public List<Message> takeReceivedMessages() {
-        return returnCopyAndClear(receiveBuffer);
+    public List<Message> getReceivedMessages() {
+        return new ArrayList<>(receiveBuffer);
+    }
+
+    void clearReceivedMessages() {
+        receiveBuffer.clear();
     }
 
     List<Message> takeMessagesToSend() {

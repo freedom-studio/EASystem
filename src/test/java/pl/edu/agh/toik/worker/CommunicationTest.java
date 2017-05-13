@@ -46,7 +46,7 @@ public class CommunicationTest {
         communication.runCommunication();
 
         WorkerContext context = communication.getContext(agent);
-        assertThat(context.takeReceivedMessages())
+        assertThat(context.getReceivedMessages())
                 .containsExactly(message(agent, "hello"), message(agent, "hi"));
     }
 
@@ -87,9 +87,9 @@ public class CommunicationTest {
         // then message from agent should be sent out
         messagingService.expectMessagesWereSent(message(worker1, "C"));
         // and each agent should access only messages to them
-        assertThat(communication.getContext(agent1).takeReceivedMessages())
+        assertThat(communication.getContext(agent1).getReceivedMessages())
                 .containsExactly(message(agent1, "X"));
-        assertThat(communication.getContext(agent2).takeReceivedMessages())
+        assertThat(communication.getContext(agent2).getReceivedMessages())
                 .containsExactly(message(agent2, "Y"));
     }
 
@@ -101,8 +101,26 @@ public class CommunicationTest {
         communication.register(agent);
         communication.runCommunication();
 
-        assertThat(communication.getContext(agent).takeReceivedMessages())
+        assertThat(communication.getContext(agent).getReceivedMessages())
                 .containsExactly(message(agent, "A"));
+    }
+
+    @Test public void shouldAllowToGetTheSameListOfReceivedMessagesMultipleTimesAndOnlyResetItBetweenRuns() {
+        communication.register(agent);
+        messagingService.messageComesFromOutside(message(agent, "A"));
+        communication.runCommunication();
+
+        assertThat(communication.getContext(agent).getReceivedMessages())
+                .containsExactly(message(agent, "A"));
+        assertThat(communication.getContext(agent).getReceivedMessages())
+                .containsExactly(message(agent, "A"));
+
+        messagingService.messageComesFromOutside(message(agent, "B"));
+        communication.runCommunication();
+        assertThat(communication.getContext(agent).getReceivedMessages())
+                .containsExactly(message(agent, "B"));
+        assertThat(communication.getContext(agent).getReceivedMessages())
+                .containsExactly(message(agent, "B"));
     }
 
     private Message message(Id recipient, String payload) {

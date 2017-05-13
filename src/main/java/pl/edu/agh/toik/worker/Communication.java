@@ -36,6 +36,7 @@ class Communication {
     }
 
     private void deliverMessagesFromOutsideToContexts() {
+        contexts.values().forEach(CommunicationContext::clearReceivedMessages);
         Iterator<Message> messages = messagesToDeliver.iterator();
         while (messages.hasNext()) {
             Message message = messages.next();
