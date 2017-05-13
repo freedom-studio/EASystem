@@ -15,11 +15,6 @@
 		-->
 	</util:list>
 	
-	<!-- Naming service -->
-	<!--
-	<bean id="naming-service" class="pl.edu.agh.lab.toik.comm.v2.impl.NamingService"></bean>
-	-->
-	
 	<!-- Migration and topology -->
 	<util:constant id="topology-type" static-field="pl.edu.agh.toik.topology.TopologyType.CLIQUE"/>
 	<bean id="topology-factory" class="pl.edu.agh.toik.starter.mocks.topology.MockTopologyFactory"></bean>
@@ -49,5 +44,13 @@
 			<constructor-arg name="stopStrategy" ref="stop-strategy"></constructor-arg>
 		</bean>
 	</util:list>
+	
+	<!-- Naming service -->
+	<!--
+	-->
+	<bean id="naming-service" class="pl.edu.agh.toik.starter.mocks.communication.MockNamingService">
+		<constructor-arg name="workerConfigs" ref="worker-configs"></constructor-arg>
+	</bean>
+	
 	
 </beans>
