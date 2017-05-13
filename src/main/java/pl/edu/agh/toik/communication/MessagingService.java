@@ -4,5 +4,5 @@ import java.util.function.Consumer;
 
 public interface MessagingService {
     void registerHandler(Consumer<Message> handler);
-    void send(Id destination, Message message);
+    void send(Message message);
 }
