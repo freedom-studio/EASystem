@@ -1,11 +1,7 @@
-# Intellij
-.idea/
-*.iml
-*.iws
+/**/target
+/**/.classpath
+/**/.project
+/**/.settings
+/**/.springBeans
+ 
 
-# Mac
-.DS_Store
-
-# Maven
-log/
-target/
