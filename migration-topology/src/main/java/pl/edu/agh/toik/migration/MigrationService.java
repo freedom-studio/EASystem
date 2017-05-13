@@ -8,5 +8,5 @@ public interface MigrationService {
     void emigrate(List<Neighbour> neighbours, Population population);
     void immigrate(String agentID, Population population);
     void setCommunicator(ICommunicator communicator);
-    void addMessageToBuffor(Message message);
+    void handleMigrationMessage(Message message);
 }
