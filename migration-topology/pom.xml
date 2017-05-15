@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
 	<parent>
 	    <groupId>pl.edu.agh</groupId>
 	    <artifactId>toik</artifactId>
@@ -12,12 +11,12 @@
 	</parent>
 
     <groupId>pl.edu.agh.toik</groupId>
-    <artifactId>worker</artifactId>
+    <artifactId>migration-topology</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <description>Worker</description>
+    <description>Migration and Topology</description>
 
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+  	</properties>
 </project>

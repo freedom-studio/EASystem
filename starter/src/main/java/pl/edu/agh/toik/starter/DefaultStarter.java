@@ -76,9 +76,8 @@ public class DefaultStarter implements Starter {
 				.addAll(agentConfigs);
 			workerToAgentConfigs.put(workerId, agentConfigs);
 		}
-		
+
 		while (stopStrategy.shouldContinue()) {
-			
 			stopStrategy.registerIteration();
 		}
 	}

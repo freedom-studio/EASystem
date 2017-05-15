@@ -1,8 +1,5 @@
 package pl.edu.agh.toik.starter;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-
 public class App {
 	
 	

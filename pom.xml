@@ -13,7 +13,7 @@
     <module>agent</module>
     <module>communication</module>
     <module>migration-topology</module>
-    <module>properties-observable</module>
+    <module>properties</module>
     <module>starter</module>
     <module>visualization</module>
     <module>worker</module>
@@ -21,6 +21,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<maven.compiler.source>1.8</maven.compiler.source>
+	<maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
