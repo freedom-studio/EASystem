@@ -1,0 +1,7 @@
+INDEX VERSION 1.130+/home/klaudia/kompo/EASystem/.metadata/.plugins/org.eclipse.jdt.core
+2102153556.index
+2330560714.index
+3765020915.index
+2556056422.index
+2540607589.index
+3163571840.index
