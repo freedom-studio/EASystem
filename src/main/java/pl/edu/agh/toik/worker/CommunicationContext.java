@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CommunicationContext implements WorkerContext {
     private final List<Message> receiveBuffer;
-    private final List<Message> sendBuffer;
+    private final List<MessageToAgent> sendBuffer;
 
     CommunicationContext() {
         this.sendBuffer = new ArrayList<>();
@@ -15,8 +15,8 @@ public class CommunicationContext implements WorkerContext {
     }
 
     @Override
-    public void sendMessage(Message message) {
-        sendBuffer.add(message);
+    public void sendMessage(String agent, Message message) {
+        sendBuffer.add(new MessageToAgent(agent, message));
     }
 
     @Override
@@ -28,7 +28,7 @@ public class CommunicationContext implements WorkerContext {
         receiveBuffer.clear();
     }
 
-    List<Message> takeMessagesToSend() {
+    List<MessageToAgent> takeMessagesToSend() {
         return returnCopyAndClear(sendBuffer);
     }
 
@@ -36,8 +36,8 @@ public class CommunicationContext implements WorkerContext {
         receiveBuffer.add(message);
     }
 
-    private List<Message> returnCopyAndClear(List<Message> list) {
-        ArrayList<Message> messages = new ArrayList<>(list);
+    private <T> List<T> returnCopyAndClear(List<T> list) {
+        ArrayList<T> messages = new ArrayList<>(list);
         list.clear();
         return messages;
     }

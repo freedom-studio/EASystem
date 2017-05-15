@@ -1,7 +1,7 @@
 package pl.edu.agh.toik.worker;
 
 import pl.edu.agh.toik.agent.Agent;
-import pl.edu.agh.toik.communication.MessagingService;
+import pl.edu.agh.toik.communication.Communicator;
 
 import java.util.List;
 
@@ -11,10 +11,10 @@ public class Worker {
     private final List<Agent> agents;
     private final StopStrategy stopStrategy;
 
-    public Worker(MessagingService messagingService, String xmlConfig) {
+    public Worker(Communicator communicator, String xmlConfig) {
         WorkerConfig config = new ConfigParser().parse(xmlConfig);
         stopStrategy = config.getStopStrategy();
-        communication = new Communication(messagingService);
+        communication = new Communication(config.getName(), communicator);
         agents = new AgentSpawner().spawn(config.getAgentConfigs(), config.getObservers());
         agents.stream().map(Agent::getId).forEach(communication::register);
     }

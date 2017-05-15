@@ -1,28 +1,27 @@
 package pl.edu.agh.toik.worker;
 
-import pl.edu.agh.toik.communication.Id;
-import pl.edu.agh.toik.communication.Message;
-import pl.edu.agh.toik.communication.MessagingService;
+import pl.edu.agh.toik.communication.Communicator;
 
 import java.util.*;
 
 class Communication {
-    private final MessagingService messagingService;
-    private final Map<Id, CommunicationContext> contexts;
-    private final List<Message> messagesToDeliver;
+    private final Communicator communicator;
+    private final Map<String, CommunicationContext> contexts;
+    private final List<MessageToAgent> messagesToDeliver;
 
-    Communication(MessagingService messagingService) {
-        this.messagingService = messagingService;
+    Communication(String workerName, Communicator communicator) {
+        this.communicator = communicator;
+        this.communicator.init(workerName);
         this.messagesToDeliver = new ArrayList<>();
-        this.contexts = new HashMap<>();
-        messagingService.registerHandler(messagesToDeliver::add);
+        this.contexts = new LinkedHashMap<>();
+        communicator.registerObserver((agent, msg) -> messagesToDeliver.add(new MessageToAgent(agent, msg)));
     }
 
-    void register(Id id) {
+    void register(String id) {
         contexts.put(id, new CommunicationContext());
     }
 
-    WorkerContext getContext(Id id) {
+    WorkerContext getContext(String id) {
         if (contexts.containsKey(id)) {
             return contexts.get(id);
         } else {
@@ -31,26 +30,33 @@ class Communication {
     }
 
     void runCommunication() {
+        clearReceiveBuffers();
         deliverMessagesFromOutsideToContexts();
         sendMessagesFromContextsOutside();
     }
 
     private void deliverMessagesFromOutsideToContexts() {
-        contexts.values().forEach(CommunicationContext::clearReceivedMessages);
-        Iterator<Message> messages = messagesToDeliver.iterator();
+        Iterator<MessageToAgent> messages = messagesToDeliver.iterator();
         while (messages.hasNext()) {
-            Message message = messages.next();
-            Id recipient = message.getRecipient();
+            MessageToAgent messageToAgent = messages.next();
+            String recipient = messageToAgent.getAgentId();
             if (contexts.containsKey(recipient)) {
-                contexts.get(recipient).addReceivedMessage(message);
+                contexts.get(recipient).addReceivedMessage(messageToAgent.getMessage());
                 messages.remove();
             }
         }
     }
 
+    private void clearReceiveBuffers() {
+        contexts.values().forEach(CommunicationContext::clearReceivedMessages);
+    }
+
     private void sendMessagesFromContextsOutside() {
         contexts.values().stream()
                 .flatMap(c -> c.takeMessagesToSend().stream())
-                .forEachOrdered(messagingService::send);
+                .forEachOrdered(msg -> {
+                    String workerName = communicator.getWorkerName(msg.getAgentId());
+                    communicator.sendMessage(workerName, msg.getAgentId(), msg.getMessage());
+                });
     }
 }

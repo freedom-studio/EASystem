@@ -5,6 +5,6 @@ import pl.edu.agh.toik.communication.Message;
 import java.util.List;
 
 public interface WorkerContext {
-    void sendMessage(Message message);
+    void sendMessage(String agent, Message message);
     List<Message> getReceivedMessages();
 }
