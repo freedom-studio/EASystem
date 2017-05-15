@@ -1,13 +1,8 @@
 package pl.edu.agh.toik.starter;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
-    }
+public class App {
+	public static void main(String[] args) {
+		Starter starter = new DefaultStarter("src/main/resources/application-context.xml");
+		starter.start();
+	}
 }

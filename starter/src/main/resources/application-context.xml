@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"> 
+
+	<!-- Algorithms -->
+	<util:list id="stages">
+		<bean id="selection" class="pl.edu.agh.toik.starter.mocks.agent.algorithm.RandomSelection"></bean>
+		<bean id="crossover" class="pl.edu.agh.toik.starter.mocks.agent.algorithm.RandomCrossover"></bean>
+		<bean id="mutation" class="pl.edu.agh.toik.starter.mocks.agent.algorithm.RandomMutation"></bean>
+		<!--  
+		<bean id="" class="pl.edu.agh.toik.starter.mocks.agent.algorithm."></bean>
+		-->
+	</util:list>
+	
+	<!-- Migration and topology -->
+	<util:constant id="topology-type" static-field="pl.edu.agh.toik.topology.TopologyType.CLIQUE"/>
+	<bean id="topology-factory" class="pl.edu.agh.toik.starter.mocks.topology.MockTopologyFactory"></bean>
+
+	<!-- Workers -->
+	<bean id="stop-strategy" class="pl.edu.agh.toik.starter.mocks.worker.MaxIterationsStopStrategy">
+		<constructor-arg name="maxIters" value="2000"></constructor-arg>
+	</bean>
+	
+	<util:list id="worker-configs">
+		<bean class="pl.edu.agh.toik.starter.mocks.worker.MockWorkerConfig">
+			<constructor-arg name="id">
+				<bean class="pl.edu.agh.toik.starter.mocks.MockId">
+					<constructor-arg name="id" value="worker-1"></constructor-arg>
+				</bean>
+			</constructor-arg>
+			<constructor-arg name="agentCount" value="10"></constructor-arg>
+			<constructor-arg name="stopStrategy" ref="stop-strategy"></constructor-arg>
+		</bean>
+		<bean class="pl.edu.agh.toik.starter.mocks.worker.MockWorkerConfig">
+			<constructor-arg name="id">
+				<bean class="pl.edu.agh.toik.starter.mocks.MockId">
+					<constructor-arg name="id" value="worker-2"></constructor-arg>
+				</bean>
+			</constructor-arg>
+			<constructor-arg name="agentCount" value="20"></constructor-arg>
+			<constructor-arg name="stopStrategy" ref="stop-strategy"></constructor-arg>
+		</bean>
+	</util:list>
+	
+	<!-- Naming service -->
+	<!--
+	-->
+	<bean id="naming-service" class="pl.edu.agh.toik.starter.mocks.communication.MockNamingService">
+		<constructor-arg name="workerConfigs" ref="worker-configs"></constructor-arg>
+	</bean>
+	
+	
+</beans>
