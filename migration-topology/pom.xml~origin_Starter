@@ -11,21 +11,12 @@
 	</parent>
 
     <groupId>pl.edu.agh.toik</groupId>
-    <artifactId>worker</artifactId>
+    <artifactId>migration-topology</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <description>Worker</description>
+    <description>Migration and Topology</description>
 
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-
-	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-compiler-plugin</artifactId>
-		<configuration>
-		    <source>1.8</source>
-		    <target>1.8</target>
-		</configuration>
-	</plugin>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+  	</properties>
 </project>
