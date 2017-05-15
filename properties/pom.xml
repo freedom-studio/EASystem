@@ -11,4 +11,12 @@
   <artifactId>properties</artifactId>
   <name>properties</name>
   <url>http://maven.apache.org</url>
+<<<<<<< HEAD
+=======
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+>>>>>>> origin/Starter
 </project>
